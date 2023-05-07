@@ -1,17 +1,4 @@
-// Define an array of objects, where each object represents a card
-const cardData = [
-  {
-    thumbnailUrl: "./images/01.jpg",
-    imageUrl: "./images/01.jpg",
-    description: "Our hero, Runty Collins.",
-  },
-  {
-    thumbnailUrl: "./images/01b.jpg",
-    imageUrl: "./images/01b.jpg",
-    description:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
-  },
-];
+import cardData from "./imageData.js";
 
 // Get a reference to the row element where the cards will be displayed
 const rowEl = document.querySelector(".row");
@@ -51,5 +38,28 @@ document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
     // Show the modal
     const modal = new bootstrap.Modal(modalEl);
     modal.show();
+  });
+});
+
+// Add a click event listener to each image link
+document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Get the URL of the image to display from the data-image attribute
+    const imageUrl = e.currentTarget.dataset.image;
+
+    // Set the src attribute of the modal image element to the URL of the clicked image
+    modalImageEl.setAttribute("src", imageUrl);
+
+    // Show the modal
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+
+    // Add an event listener to the modal element to reset the image src attribute and remove the modal-open class from the body element when the modal is hidden
+    modalEl.addEventListener("hidden.bs.modal", () => {
+      modalImageEl.setAttribute("src", "");
+      document.body.classList.remove("modal-open");
+    });
   });
 });
