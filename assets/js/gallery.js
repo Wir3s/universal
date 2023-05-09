@@ -1,19 +1,21 @@
 import cardData from "./imageData.js";
 
-// Get a reference to the row element where the cards will be displayed
-const rowEl = document.querySelector(".row");
+// Add an event listener that triggers when the page is fully loaded
+window.addEventListener("load", () => {
+  // Get a reference to the row element where the cards will be displayed
+  const rowEl = document.querySelector(".row");
 
-// Loop through the card data array and generate HTML for each card using template literals
-cardData.forEach((card) => {
-  const cardHtml = `
+  // Loop through the card data array and generate HTML for each card using template literals
+  cardData.forEach((card) => {
+    const cardHtml = `
           <div class="card border-0" style="width: 18rem;">
             
 
             <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-image="${
               card.imageUrl
             }" ${
-    card.modalSize ? `data-bs-modal-size="${card.modalSize}"` : ""
-  }>
+      card.modalSize ? `data-bs-modal-size="${card.modalSize}"` : ""
+    }>
 
 
 
@@ -28,56 +30,57 @@ cardData.forEach((card) => {
           </div>
         `;
 
-  // Add the generated HTML to the row element
-  rowEl.innerHTML += cardHtml;
-});
+    // Add the generated HTML to the row element
+    rowEl.innerHTML += cardHtml;
+  });
 
-// Get a reference to the modal and image elements
-const modalEl = document.getElementById("exampleModal");
-const modalImageEl = document.getElementById("modalImage");
+  // Get a reference to the modal and image elements
+  const modalEl = document.getElementById("exampleModal");
+  const modalImageEl = document.getElementById("modalImage");
 
-// Add a click event listener to each image link
-document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
+  // Add a click event listener to each image link
+  document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    // Close any existing modals
-    const modals = document.querySelectorAll(".modal.show");
-    modals.forEach((modal) => {
-      const bsModal = bootstrap.Modal.getInstance(modal);
-      bsModal.hide();
-    });
+      // Close any existing modals
+      const modals = document.querySelectorAll(".modal.show");
+      modals.forEach((modal) => {
+        const bsModal = bootstrap.Modal.getInstance(modal);
+        bsModal.hide();
+      });
 
-    // Get the URL of the image to display from the data-image attribute
-    const imageUrl = e.currentTarget.dataset.image;
+      // Get the URL of the image to display from the data-image attribute
+      const imageUrl = e.currentTarget.dataset.image;
 
-    // Set the src attribute of the modal image element to the URL of the clicked image
-    modalImageEl.setAttribute("src", imageUrl);
+      // Set the src attribute of the modal image element to the URL of the clicked image
+      modalImageEl.setAttribute("src", imageUrl);
 
-    // Get the size of the modal from the data-bs-modal-size attribute
-    const modalSize = e.currentTarget.dataset.bsModalSize;
+      // Get the size of the modal from the data-bs-modal-size attribute
+      const modalSize = e.currentTarget.dataset.bsModalSize;
 
-    // Set the size of the modal if the data-bs-modal-size attribute is present
-    if (modalSize) {
-      modalEl
-        .querySelector(".modal-dialog")
-        .classList.add(`modal-${modalSize}`);
-    }
+      // Set the size of the modal if the data-bs-modal-size attribute is present
+      if (modalSize) {
+        modalEl
+          .querySelector(".modal-dialog")
+          .classList.add(`modal-${modalSize}`);
+      }
 
-    // Show the modal
-    const modal = new bootstrap.Modal(modalEl);
-    modal.show();
+      // Show the modal
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
 
-    // Add an event listener to the modal element to reset the image src attribute and remove the modal-open class from the body element when the modal is hidden
-    modalEl.addEventListener("hidden.bs.modal", () => {
-      // Explicitly hide the modal before resetting the src attribute of the img element
-      modal.hide();
-      modalImageEl.setAttribute("src", "");
-      document.body.classList.remove("modal-open");
-      // Remove the modal size class from the modal dialog element
-      modalEl
-        .querySelector(".modal-dialog")
-        .classList.remove(`modal-${modalSize}`);
+      // Add an event listener to the modal element to reset the image src attribute and remove the modal-open class from the body element when the modal is hidden
+      modalEl.addEventListener("hidden.bs.modal", () => {
+        // Explicitly hide the modal before resetting the src attribute of the img element
+        modal.hide();
+        modalImageEl.setAttribute("src", "");
+        document.body.classList.remove("modal-open");
+        // Remove the modal size class from the modal dialog element
+        modalEl
+          .querySelector(".modal-dialog")
+          .classList.remove(`modal-${modalSize}`);
+      });
     });
   });
 });
