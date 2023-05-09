@@ -7,8 +7,20 @@ const rowEl = document.querySelector(".row");
 cardData.forEach((card) => {
   const cardHtml = `
           <div class="card border-0" style="width: 18rem;">
-            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-image="${card.imageUrl}">
-              <img src="${card.thumbnailUrl}" class="card-img-top gallery-img" alt="${card.description}">
+            
+
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-image="${
+              card.imageUrl
+            }" ${
+    card.modalSize ? `data-bs-modal-size="${card.modalSize}"` : ""
+  }>
+
+
+
+
+              <img src="${
+                card.thumbnailUrl
+              }" class="card-img-top gallery-img" alt="${card.description}">
             </a>
             <div class="card-body">
               <p class="card-text">${card.description}</p>
@@ -29,11 +41,28 @@ document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
 
+    // Close any existing modals
+    const modals = document.querySelectorAll(".modal.show");
+    modals.forEach((modal) => {
+      const bsModal = bootstrap.Modal.getInstance(modal);
+      bsModal.hide();
+    });
+
     // Get the URL of the image to display from the data-image attribute
     const imageUrl = e.currentTarget.dataset.image;
 
     // Set the src attribute of the modal image element to the URL of the clicked image
     modalImageEl.setAttribute("src", imageUrl);
+
+    // Get the size of the modal from the data-bs-modal-size attribute
+    const modalSize = e.currentTarget.dataset.bsModalSize;
+
+    // Set the size of the modal if the data-bs-modal-size attribute is present
+    if (modalSize) {
+      modalEl
+        .querySelector(".modal-dialog")
+        .classList.add(`modal-${modalSize}`);
+    }
 
     // Show the modal
     const modal = new bootstrap.Modal(modalEl);
@@ -45,6 +74,10 @@ document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
       modal.hide();
       modalImageEl.setAttribute("src", "");
       document.body.classList.remove("modal-open");
+      // Remove the modal size class from the modal dialog element
+      modalEl
+        .querySelector(".modal-dialog")
+        .classList.remove(`modal-${modalSize}`);
     });
   });
 });
