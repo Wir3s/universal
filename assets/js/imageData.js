@@ -22,7 +22,7 @@ const cardData = [
     id: 4,
     thumbnailUrl: "./assets/images/thumbnails/04t.jpg",
     imageUrl: "./assets/images/04.jpg",
-    description: "Enchanté. Mrs. Vogel.",
+    description: "Enchanté. Delphine Vogel.",
   },
   {
     id: 5,
