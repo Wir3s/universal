@@ -17,11 +17,8 @@ window.addEventListener("load", () => {
       card.modalSize ? `data-bs-modal-size="${card.modalSize}"` : ""
     }>
 
-
-
-
-              <img src="${
-                card.thumbnailUrl
+            <img src="${
+              card.thumbnailUrl
               }" class="card-img-top gallery-img" alt="${card.description}">
             </a>
             <div class="card-body">
@@ -38,22 +35,13 @@ window.addEventListener("load", () => {
   const modalEl = document.getElementById("exampleModal");
   const modalImageEl = document.getElementById("modalImage");
 
-  // // Add a click event listener to each image link
-  // document.querySelectorAll("[data-bs-toggle='modal']").forEach((link) => {
-  //   link.addEventListener("click", (e) => {
-  //     e.preventDefault();
+
   // Add a click event listener to the row element to handle clicks on the image links
   rowEl.addEventListener("click", (e) => {
     // Check if the clicked element is an image link
     if (e.target.tagName === "IMG") {
       e.preventDefault();
 
-      // // Close any existing modals
-      // const modals = document.querySelectorAll(".modal.show");
-      // modals.forEach((modal) => {
-      //   const bsModal = bootstrap.Modal.getInstance(modal);
-      //   bsModal.hide();
-      // });
 
       // Get the URL of the image to display from the data-image attribute
       const imageUrl = e.target.parentNode.dataset.image;
