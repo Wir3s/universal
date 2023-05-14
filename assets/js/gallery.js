@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
 
             <img src="${
               card.thumbnailUrl
-              }" class="card-img-top gallery-img" alt="${card.description}">
+            }" class="card-img-top gallery-img" alt="${card.description}">
             </a>
             <div class="card-body">
               <p class="card-text">${card.description}</p>
@@ -35,13 +35,11 @@ window.addEventListener("load", () => {
   const modalEl = document.getElementById("exampleModal");
   const modalImageEl = document.getElementById("modalImage");
 
-
   // Add a click event listener to the row element to handle clicks on the image links
   rowEl.addEventListener("click", (e) => {
     // Check if the clicked element is an image link
     if (e.target.tagName === "IMG") {
       e.preventDefault();
-
 
       // Get the URL of the image to display from the data-image attribute
       const imageUrl = e.target.parentNode.dataset.image;
@@ -69,6 +67,8 @@ window.addEventListener("load", () => {
         modalEl
           .querySelector(".modal-dialog")
           .classList.remove(`modal-${modalSize}`);
+        // Reload the page
+        window.location.reload();
       });
     }
   });
