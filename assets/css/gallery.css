@@ -1,0 +1,27 @@
+#gallery-main {
+    margin-top: 50px;
+  }
+  .gallery-img {
+    height: 300px;
+  }
+  header {
+   margin-bottom: 20px;
+   background-color:#cccdcf;
+  }
+  body {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  }
+  .gallery-img:hover {
+cursor: pointer;
+}
+
+footer a {
+color: white;
+text-decoration: none;
+}
+
+footer a:hover {
+color: #ccc;
+text-decoration: underline;
+}

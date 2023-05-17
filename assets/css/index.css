@@ -1,0 +1,37 @@
+#main-body {
+    margin-top: 50px;
+  }
+  body {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #211e19;
+  }
+  header {
+   margin-bottom: 20px;
+   background-color: #baaa91;
+   color: black;
+  }
+  /* Style the links in the header */
+  header .navbar .navbar-nav .nav-link,
+  header .navbar .navbar-nav .nav-link:visited {
+  color: black;
+  text-decoration: none;
+  }
+
+/* Style the brand text in the header */
+header .navbar .navbar-brand {
+ color: black;
+  }
+  .navbar-toggler-icon {
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    }
+    
+    footer a:hover {
+    color: #ccc;
+    text-decoration: underline;
+    }
