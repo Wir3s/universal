@@ -9,7 +9,7 @@ cardData.forEach((card) => {
               card.imageUrl
             }" ${
     card.modalSize ? `data-bs-modal-size="${card.modalSize}"` : ""
-  }>
+  } data-description="${card.description}">
               <img src="${
                 card.thumbnailUrl
               }" class="card-img-top gallery-img" alt="${card.description}">
@@ -34,6 +34,11 @@ modalEl.addEventListener("shown.bs.modal", (e) => {
   if (modalSize) {
     modalEl.querySelector(".modal-dialog").classList.add(`modal-${modalSize}`);
   }
+  // Get the description from the data-description attribute
+  const imageDescription = e.relatedTarget.dataset.description;
+
+  // Set the alt attribute of the modal image element to the description
+  modalImageEl.setAttribute("alt", imageDescription);
 });
 
 modalEl.addEventListener("hidden.bs.modal", () => {
